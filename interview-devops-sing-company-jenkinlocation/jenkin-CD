@@ -1,0 +1,55 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Deploy') { 
+            steps {
+                script {
+                    // login to company container registy
+                    echo 'login to company container registry'
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER_NAME --password-stdin'
+                    // Deploy the docker-compose.yaml file
+                    sh 'echo deploy the wizard-almanac:${APP_VERSION} app on production with docker compose!'
+                    sh 'docker compose -f app/docker-compose.yaml up -d'
+                    // Check the app status after build
+                    sh 'docker compose -f app/docker-compose.yaml ps | grep wizard-almanac'
+                    echo 'done build!'                    
+                } 
+            }
+        }
+        stage('Test deployment') { 
+            steps {
+                script {
+                    sh 'echo test the app deployment on prod environment!'
+                    // Echo this app 's public IP. This IP is passed by setting the APP_PUBLIC_IP parameter when launching pipeline
+                    sh 'echo this is the Public IP of the app: ${APP_PUBLIC_IP}'
+                
+                    //Make a test request to the app and check exit status
+                    // Check the exit status (0 means success, non-zero means error)
+                    sh 'chmod +x app/test-deployment.sh'
+                    sh 'app/test-deployment.sh'
+                    STATUS = """${sh(
+                            returnStatus: true,
+                            script: 'echo $?'
+                        )}"""
+                    if (STATUS == "0") {
+                        echo 'App has been deployed successfully!'
+                    } else {
+                        echo 'App error'
+                    }           
+                }     
+                
+            }
+        }
+        stage('Garbage collection') { 
+            steps {
+                echo 'Collect and remove garbage...'
+                  script {
+                    //remove all files which have been pulled from git repo
+                    echo 'Removing all garbage in the working directory...'   
+                    sh 'rm -rf ./*'
+                    echo 'Successfully remove all garbage in the working directory'             
+                }     
+            }
+        }         
+    }
+}
