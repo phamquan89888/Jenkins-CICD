@@ -1,0 +1,258 @@
+Started by user admin
+Obtained interview-devops-sing-company-jenkinlocation/jenkinfile-CI from git http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on my-slave-test-ubuntu in /home/sf/jenkin/workspace/Test
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout (hide)
+The recommended git tool is: NONE
+using credential git-repo-code-interview
+Fetching changes from the remote Git repository
+ > git rev-parse --resolve-git-dir /home/sf/jenkin/workspace/Test/.git # timeout=10
+ > git config remote.origin.url http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw # timeout=10
+Fetching upstream changes from http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 114095f628e3d61753ff4acc6a1ef04c9c9feb7f (refs/remotes/origin/master)
+Commit message: "my 3rdcommit"
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 114095f628e3d61753ff4acc6a1ef04c9c9feb7f # timeout=10
+ > git rev-list --no-walk 06f60d49e68f209a7d4915f6588e3865d4e61fc7 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ echo buid step with the 3.11-slim python base version!
+buid step with the 3.11-slim python base version!
+[Pipeline] sh
++ echo buid step with the 1.0.0 python app version!
+buid step with the 1.0.0 python app version!
+[Pipeline] echo
+requirement is not set, using default file in repo
+[Pipeline] echo
+show content of requirement.txt file
+[Pipeline] sh
++ cat requirements.txt
+flask==3.1.0
+[Pipeline] echo
+Start buidling image...
+[Pipeline] sh
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   2.67MB
+
+Step 1/13 : ARG PYTHON_BASE_VERSION=3.11-slim
+Step 2/13 : ARG APP_VERSION=1.0.0
+Step 3/13 : FROM python:${PYTHON_BASE_VERSION} AS pythonBaseStage
+ ---> 533df8de4eb8
+Step 4/13 : WORKDIR /app
+ ---> Using cache
+ ---> 20ebfe9aa94b
+Step 5/13 : COPY requirements.txt ./
+ ---> dedd900732b3
+Step 6/13 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Running in 7c0af209b551
+Collecting flask==3.1.0 (from -r requirements.txt (line 1))
+  Downloading flask-3.1.0-py3-none-any.whl.metadata (2.7 kB)
+Collecting Werkzeug>=3.1 (from flask==3.1.0->-r requirements.txt (line 1))
+  Downloading werkzeug-3.1.3-py3-none-any.whl.metadata (3.7 kB)
+Collecting Jinja2>=3.1.2 (from flask==3.1.0->-r requirements.txt (line 1))
+  Downloading jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting itsdangerous>=2.2 (from flask==3.1.0->-r requirements.txt (line 1))
+  Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting click>=8.1.3 (from flask==3.1.0->-r requirements.txt (line 1))
+  Downloading click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+Collecting blinker>=1.9 (from flask==3.1.0->-r requirements.txt (line 1))
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->flask==3.1.0->-r requirements.txt (line 1))
+  Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+Downloading flask-3.1.0-py3-none-any.whl (102 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.0/103.0 kB 1.0 MB/s eta 0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading click-8.1.7-py3-none-any.whl (97 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 4.8 MB/s eta 0:00:00
+Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Downloading jinja2-3.1.4-py3-none-any.whl (133 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.3/133.3 kB 4.5 MB/s eta 0:00:00
+Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 224.5/224.5 kB 7.6 MB/s eta 0:00:00
+Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, flask
+Successfully installed Jinja2-3.1.4 MarkupSafe-3.0.2 Werkzeug-3.1.3 blinker-1.9.0 click-8.1.7 flask-3.1.0 itsdangerous-2.2.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0m[91m
+[notice] A new release of pip is available: 24.0 -> 24.3.1
+[notice] To update, run: pip install --upgrade pip
+[0mRemoving intermediate container 7c0af209b551
+ ---> 42f910eac8fa
+Step 7/13 : COPY app/app.py /app
+ ---> bd99e77ba70e
+Step 8/13 : EXPOSE 5000
+ ---> Running in 0005dfd5733f
+Removing intermediate container 0005dfd5733f
+ ---> 8e0837550442
+Step 9/13 : CMD ["python", "app.py"]
+ ---> Running in 27be7fd6d27e
+Removing intermediate container 27be7fd6d27e
+ ---> 9c9b0f925fa5
+Step 10/13 : LABEL version="1.0"
+ ---> Running in 57d448e455a9
+Removing intermediate container 57d448e455a9
+ ---> 889028b5fadb
+Step 11/13 : LABEL description="Flask web application container"
+ ---> Running in 3444e192b6ad
+Removing intermediate container 3444e192b6ad
+ ---> be4006dbe29a
+Step 12/13 : LABEL maintainer="DevopsX@myCompany.com"
+ ---> Running in 76ac2057db51
+Removing intermediate container 76ac2057db51
+ ---> 9824d4493699
+Step 13/13 : LABEL repository="https://git.codesubmit.io"
+ ---> Running in c0aebb0f3931
+Removing intermediate container c0aebb0f3931
+ ---> 9d7dc893c7c8
+Successfully built 9d7dc893c7c8
+Successfully tagged wizard-almanac:1.0.0
+[Pipeline] sh
++ docker images
++ grep wizard-almanac
+wizard-almanac                            1.0.0       9d7dc893c7c8   Less than a second ago   145MB
+wizard-almanac                            1.0.2       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            1.0.3       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            1.0.4       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            1.0.5       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            1.0.6       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            1.0.7       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            2.0.0       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            2.0.1       0c7b1e8d4b5c   7 hours ago              145MB
+thanhnv25121994/wizard-almanac            1.0.4       0c7b1e8d4b5c   7 hours ago              145MB
+thanhnv25121994/wizard-almanac            1.0.5       0c7b1e8d4b5c   7 hours ago              145MB
+thanhnv25121994/wizard-almanac            1.0.6       0c7b1e8d4b5c   7 hours ago              145MB
+thanhnv25121994/wizard-almanac            1.0.7       0c7b1e8d4b5c   7 hours ago              145MB
+thanhnv25121994/wizard-almanac            2.0.0       0c7b1e8d4b5c   7 hours ago              145MB
+thanhnv25121994/wizard-almanac            2.0.1       0c7b1e8d4b5c   7 hours ago              145MB
+wizard-almanac                            1.0.1       648bd3af8f64   9 hours ago              144MB
+[Pipeline] echo
+done build!
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ echo test the app image
+test the app image
+[Pipeline] echo
+Run the image
+[Pipeline] sh
+d187ebc881f81cba5d13c06a75f602f700e2a6d310b2b52ed5d58ca1af53b9fc
+[Pipeline] echo
+Check container status
+[Pipeline] sh
++ chmod +x app/test-app.sh
+[Pipeline] sh
++ app/test-app.sh
+checking app localhost:5000
+Welcome to the Wizard's Almanac
+[Pipeline] sh
++ echo 0
+0
+[Pipeline] echo
+App is running as intened!
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push the image to company container registy)
+[Pipeline] sh
++ echo Publish step
+Publish step
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ echo B56%21dsqwet@!
++ docker login -u thanhnv25121994 --password-stdin
+WARNING! Your password will be stored unencrypted in /home/sf/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] sh
++ docker tag wizard-almanac:1.0.0 thanhnv25121994/wizard-almanac:1.0.0
+[Pipeline] sh
++ docker push thanhnv25121994/wizard-almanac:1.0.0
+The push refers to repository [docker.io/thanhnv25121994/wizard-almanac]
+a73a2c09c4d8: Preparing
+5a0ab1184cc5: Preparing
+230dacbaef0e: Preparing
+a91bdc815eb4: Preparing
+ad05cdcb59cd: Preparing
+3a9ca0e18fd5: Preparing
+42ca3c4e0243: Preparing
+c0f1022b22a9: Preparing
+3a9ca0e18fd5: Waiting
+42ca3c4e0243: Waiting
+c0f1022b22a9: Waiting
+ad05cdcb59cd: Layer already exists
+a91bdc815eb4: Layer already exists
+3a9ca0e18fd5: Layer already exists
+42ca3c4e0243: Layer already exists
+c0f1022b22a9: Layer already exists
+a73a2c09c4d8: Pushed
+230dacbaef0e: Pushed
+5a0ab1184cc5: Pushed
+1.0.0: digest: sha256:c9c50aa7564163b28eb0ff53e048503a075c35553c8e5aa1fdef0102469175a9 size: 1990
+[Pipeline] sh
++ echo 0
+0
+[Pipeline] echo
+Push image to repo successfully!
+[Pipeline] sh
++ echo latest image is thanhnv25121994/wizard-almanac:1.0.0
+latest image is thanhnv25121994/wizard-almanac:1.0.0
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Garbage collection)
+[Pipeline] echo
+Collect and remove garbage...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Removing the running wizard-almanac-app container...
+[Pipeline] sh
+wizard-almanac-app
+wizard-almanac-app
+[Pipeline] sh
++ docker ps -a
++ grep wizard-almanac-app
+[Pipeline] echo
+wizard-almanac-app has been successfully removed!
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

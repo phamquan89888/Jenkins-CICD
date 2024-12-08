@@ -1,0 +1,109 @@
+Started by user admin
+Obtained interview-devops-sing-company-jenkinlocation/jenkinfile-CD from git http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on my-slave-test-ubuntu in /home/sf/jenkin/workspace/Test-CD
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential git-repo-code-interview
+Fetching changes from the remote Git repository
+ > git rev-parse --resolve-git-dir /home/sf/jenkin/workspace/Test-CD/.git # timeout=10
+ > git config remote.origin.url http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw # timeout=10
+Fetching upstream changes from http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- http://git.codesubmit.io/linagora-1/ikbel-temtem-dziexw +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision e6c5286ac4488d3bb21568e34b2469efd39d1c6b (refs/remotes/origin/master)
+Commit message: "commit"
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e6c5286ac4488d3bb21568e34b2469efd39d1c6b # timeout=10
+ > git rev-list --no-walk 114095f628e3d61753ff4acc6a1ef04c9c9feb7f # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+login to company container registry
+[Pipeline] sh
++ echo B56%21dsqwet@!
++ docker login -u thanhnv25121994 --password-stdin
+WARNING! Your password will be stored unencrypted in /home/sf/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] sh
++ echo deploy the wizard-almanac:1.0.0 app on production with docker compose!
+deploy the wizard-almanac:1.0.0 app on production with docker compose!
+[Pipeline] sh
++ docker compose -f app/docker-compose.yaml up -d
+ Container app-wizard-almanac-1  Creating
+ Container app-wizard-almanac-1  Created
+ Container app-wizard-almanac-1  Starting
+ Container app-wizard-almanac-1  Started
+[Pipeline] sh
++ docker compose -f app/docker-compose.yaml ps
++ grep wizard-almanac
+app-wizard-almanac-1   thanhnv25121994/wizard-almanac:1.0.0   "python app.py"   wizard-almanac   1 second ago   Up Less than a second   0.0.0.0:5000->5000/tcp
+[Pipeline] echo
+done build!
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test deployment)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ echo test the app deployment on prod environment!
+test the app deployment on prod environment!
+[Pipeline] sh
++ echo this is the Public IP of the app: 192.168.132.11
+this is the Public IP of the app: 192.168.132.11
+[Pipeline] sh
++ chmod +x app/test-deployment.sh
+[Pipeline] sh
++ app/test-deployment.sh
+checking app 192.168.132.11:5000
+Welcome to the Wizard's Almanac
+[Pipeline] sh
++ echo 0
+0
+[Pipeline] echo
+App has been deployed successfully!
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Garbage collection)
+[Pipeline] echo
+Collect and remove garbage...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Removing all garbage in the working directory...
+[Pipeline] sh
++ rm -rf ./Dockerfile ./Dockerfile-jenkin ./README.md ./UserManual-jenkinpipeline.docx ./app ./interview-devops-sing-company-jenkinlocation ./requirements.txt ./~$erManual-jenkinpipeline.docx ./~WRL0003.tmp ./~WRL2296.tmp
+[Pipeline] echo
+Successfully remove all garbage in the working directory
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
