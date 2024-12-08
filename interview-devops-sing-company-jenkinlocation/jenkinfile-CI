@@ -107,7 +107,11 @@ pipeline {
                     } catch (Exception e) {
                         // If the command fails (non-zero exit code), then the app has been removed
                         echo 'wizard-almanac-app has been successfully removed!'
-                    }                          
+                    }
+                    //remove all files which have been pulled from git repo
+                    echo 'Removing all garbage in the working directory...'   
+                    sh 'rm -rf ./*'
+                    echo 'Successfully remove all garbage in the working directory'                          
                 }     
             }
         }         

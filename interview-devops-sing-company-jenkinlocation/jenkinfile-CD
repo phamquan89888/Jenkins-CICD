@@ -12,7 +12,7 @@ pipeline {
                     sh 'docker compose -f app/docker-compose.yaml up -d'
                     // Check the app status after build
                     sh 'docker compose -f app/docker-compose.yaml ps | grep wizard-almanac'
-                    echo 'done build!'                    
+                    echo 'done deployment!'                    
                 } 
             }
         }
