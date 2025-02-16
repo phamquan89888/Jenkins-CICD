@@ -37,4 +37,4 @@ CMD ["python", "app.py"]
 LABEL version="1.0"
 LABEL description="Flask web application container"
 LABEL maintainer="DevopsX@myCompany.com"
-LABEL repository="https://git.codesubmit.io"
+LABEL repository="https://github.com/phamquan89888/Jenkins-CICD"
