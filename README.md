@@ -56,11 +56,3 @@ Provide detailed documentation explaining your orchestration strategy, including
 
 -   **Maintainability**: The codebase should be clean, well-commented, and organized, making it easy for others to understand and modify. This includes using clear naming conventions, logical structuring, and providing comprehensive documentation.
 
-### CodeSubmit
-
-Please organize, design, test and document your code as if it were
-going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
-
-All the best and happy coding,
-
-The LINAGORA Team
