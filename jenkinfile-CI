@@ -4,8 +4,8 @@ pipeline {
         stage('Build') { 
             steps {
                 script {
-                    sh 'echo buid step with the ${PYTHON_BASE_VERSION} python base version!'
-                    sh 'echo buid step with the ${APP_VERSION} python app version!'
+                    sh 'echo build step with the ${PYTHON_BASE_VERSION} python base version!'
+                    sh 'echo build step with the ${APP_VERSION} python app version!'
 
                     // Check if requirement is set and not empty
                     if (env.requirement?.trim()) {
@@ -22,7 +22,7 @@ pipeline {
 
 
                     // Run the docker build command with build arguments
-                    echo 'Start buidling image...'
+                    echo 'Start building image...'
                     sh '''#!/bin/bash
                     docker build \
                         --build-arg PYTHON_BASE_VERSION=${PYTHON_BASE_VERSION} \
