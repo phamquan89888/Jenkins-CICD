@@ -43,7 +43,7 @@ pipeline {
                     // Run the image in detach mode and map container port 5000 to localhost:5000
                     echo 'Run the image'
                     sh '''#!/bin/bash
-                    docker run --name wizard-almanac-app  -d -p 10.0.2.2:5000:5000 wizard-almanac:${APP_VERSION}
+                    docker run --name wizard-almanac-app  -d -p 127.0.0.1:5000:5000 wizard-almanac:${APP_VERSION}
                     '''  
                     echo 'Check container status'    
 
