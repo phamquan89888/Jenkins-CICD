@@ -1,16 +1,6 @@
 pipeline {
     agent any 
     stages {
-        stage('Debug Info') {
-    steps {
-        sh '''
-            whoami
-            groups
-            docker ps
-            ls -lah /var/run/docker.sock
-        '''
-    }
-}
         stage('Build') { 
             steps {
                 script {
